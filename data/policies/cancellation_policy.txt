@@ -1,0 +1,93 @@
+# Order Cancellation Policy
+
+## 1. Overview
+
+Customers may request cancellation of an order before the order has been shipped.
+
+Cancellation eligibility depends on the current status of the order.
+
+## 2. Orders Eligible for Cancellation
+
+An order can normally be cancelled when its status is:
+
+* Processing
+* Confirmed
+
+If the order has not yet been shipped, the customer may request cancellation through customer support.
+
+## 3. Orders That Cannot Normally Be Cancelled
+
+An order cannot normally be cancelled once its status is:
+
+* Shipped
+* Out for Delivery
+* Delivered
+
+Once an order has been shipped, the customer may need to use the applicable return policy instead.
+
+## 4. Cancellation Process
+
+When a customer requests cancellation, the assistant should:
+
+1. Ask for the order ID if it has not been provided.
+2. Check whether the order exists.
+3. Check the current order status.
+4. Determine whether cancellation is allowed.
+5. If eligible, cancel the order.
+6. Provide the customer with the updated cancellation status.
+
+The assistant must check the order database before confirming cancellation.
+
+## 5. Cancellation of Processing Orders
+
+Orders with a status of `Processing` can normally be cancelled.
+
+Example:
+
+Customer:
+
+"Cancel order ORD1001."
+
+The system should check the current status before making the cancellation.
+
+## 6. Cancellation of Confirmed Orders
+
+Orders with a status of `Confirmed` can normally be cancelled if they have not yet been shipped.
+
+The cancellation should be recorded in the order database.
+
+## 7. Cancellation After Shipment
+
+If an order has already been shipped, the assistant should not claim that it has been cancelled.
+
+The customer should instead be informed that the order is already in the shipping process and may need to be returned after delivery according to the return policy.
+
+## 8. Cancellation and Refunds
+
+If an eligible order is successfully cancelled before shipment, the refund process may be initiated according to the refund policy.
+
+The assistant must not claim that the refund has been completed unless the payment or order system confirms it.
+
+## 9. Cancellation of Delivered Orders
+
+Delivered orders cannot be cancelled.
+
+If the customer wants to send a delivered product back, the assistant should refer to the return policy and check whether the product is eligible for return.
+
+## 10. Invalid Order ID
+
+If the provided order ID does not exist, the assistant should clearly inform the customer that the order could not be found.
+
+Example:
+
+"Order ORD9999 was not found. Please check the order ID and try again."
+
+The assistant must not invent an order or cancellation result.
+
+## 11. Important Rule
+
+The assistant must always check the latest order status before confirming cancellation.
+
+Cancellation should only be confirmed after the database has been successfully updated.
+
+The assistant must never tell a customer that an order was cancelled if the cancellation operation failed.

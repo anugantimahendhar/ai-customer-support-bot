@@ -1,0 +1,124 @@
+# Shipping Policy
+
+## 1. Overview
+
+Orders are processed after successful payment confirmation.
+
+Standard shipping generally takes 5 to 7 business days after the order has been shipped.
+
+Estimated delivery dates are provided as estimates and may change because of carrier delays, weather, holidays, incorrect addresses, or other unforeseen circumstances.
+
+## 2. Order Processing
+
+Orders normally enter processing after payment is confirmed.
+
+Processing time may vary depending on:
+
+* Product availability.
+* Order volume.
+* Payment verification.
+* Customized or special-order products.
+* Business holidays.
+
+An order that is still processing may not yet have a tracking number.
+
+## 3. Shipping Statuses
+
+The system may display the following statuses:
+
+### Processing
+
+The order has been received but has not yet been shipped.
+
+### Confirmed
+
+The order has been accepted and is being prepared for fulfillment.
+
+### Shipped
+
+The package has left the fulfillment facility and has been handed to the shipping carrier.
+
+### Out for Delivery
+
+The carrier indicates that the package is scheduled for delivery.
+
+### Delivered
+
+The carrier indicates that the package has been delivered.
+
+### Delayed
+
+The shipment has experienced a carrier or processing delay.
+
+### Cancelled
+
+The order has been cancelled and will not continue through normal fulfillment.
+
+## 4. Order Tracking
+
+Customers can request the current status of an order by providing the order ID.
+
+When available, support may provide:
+
+* Current order status.
+* Tracking number.
+* Estimated delivery date.
+* Available shipment information.
+
+The estimated delivery date is not a guaranteed delivery date.
+
+## 5. Delivery Delays
+
+Delivery may be delayed because of:
+
+* Severe weather.
+* Public holidays.
+* Carrier operational issues.
+* Incorrect or incomplete delivery addresses.
+* High shipping volumes.
+* Customs or regulatory processing.
+* Unexpected transportation disruptions.
+
+Customers should allow additional time when a carrier delay is reported.
+
+## 6. Incorrect Delivery Address
+
+Customers should verify their shipping address before placing an order.
+
+If an order is still in processing, support may be able to assist with an address correction.
+
+Once an order has been shipped, changing the delivery address may not be possible.
+
+## 7. Lost or Missing Packages
+
+If tracking information shows that a package was delivered but the customer cannot locate it, the customer should first check:
+
+* Delivery location.
+* Mailroom or reception area.
+* Household members.
+* Neighbors where appropriate.
+
+If the package remains missing, the customer should contact support for further investigation.
+
+## 8. International Shipping
+
+International shipments may require additional processing time because of customs, import requirements, or local carrier procedures.
+
+Customers may be responsible for applicable duties, taxes, or customs charges where required.
+
+## 9. Estimated Delivery
+
+Estimated delivery information is based on available shipping and carrier data.
+
+The system should not represent an estimated delivery date as a guaranteed delivery date.
+
+For real-time order questions, the order database should be checked before providing the current status.
+
+## 10. Important Rule
+
+The AI assistant must distinguish between an estimated delivery date and a confirmed delivery event.
+
+For example:
+
+* "Estimated delivery: August 14" means the package is expected around that date.
+* "Delivered" means the carrier has reported the package as delivered.

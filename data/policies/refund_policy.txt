@@ -1,0 +1,89 @@
+# Refund Policy
+
+## 1. Overview
+
+Refunds are available for eligible returned products after the return has been received and reviewed.
+
+A refund is not automatically guaranteed simply because a return request has been submitted.
+
+## 2. Refund Eligibility
+
+A customer may qualify for a refund when:
+
+* The order is eligible for return.
+* The return request was submitted within the applicable return period.
+* The returned product satisfies the return conditions.
+* The returned product has been received and successfully reviewed.
+
+## 3. Refund Process
+
+The general refund process is:
+
+1. Customer submits a return request.
+2. Support verifies return eligibility.
+3. Return instructions are provided when applicable.
+4. Customer returns the product.
+5. The returned product is received.
+6. The product may be inspected.
+7. The refund is approved or rejected.
+8. An approved refund is sent to the original payment method.
+
+## 4. Refund Method
+
+Approved refunds are normally issued to the original payment method used for the purchase.
+
+The company may not be able to redirect a refund to a different payment method.
+
+## 5. Refund Timing
+
+The time required for a refund depends on the refund-processing process and the customer's bank or payment provider.
+
+A customer should not be told that a refund will appear immediately after approval.
+
+The assistant should distinguish between:
+
+* Refund approved by the company.
+* Refund processed by the payment system.
+* Refund received by the customer's bank account or card.
+
+## 6. Partial Refunds
+
+A partial refund may apply when only part of an order is eligible for a refund or when the applicable resolution does not cover the full purchase amount.
+
+The exact refund amount depends on the order and the applicable policy.
+
+## 7. Shipping Charges
+
+Whether original or return shipping charges are refundable depends on the reason for the return and the applicable return conditions.
+
+For damaged, defective, or incorrect products, support may review whether shipping costs qualify for reimbursement.
+
+## 8. Refund Rejection
+
+A refund may be rejected when:
+
+* The product is outside the applicable return period.
+* The product does not satisfy return conditions.
+* The product is non-returnable.
+* Required components or accessories are missing.
+* The product shows damage caused after delivery by misuse or improper handling.
+
+Customers may contact support if they believe a refund decision was incorrect.
+
+## 9. Cancelled Orders
+
+If an order is successfully cancelled before shipment, the refund process may be initiated according to the payment and order status.
+
+An order that has already been shipped may not be eligible for normal cancellation and may instead require the applicable return process.
+
+## 10. Refund Status Questions
+
+When a customer asks about a specific refund, the assistant should first collect the order ID.
+
+The assistant should not claim that a refund has been approved or processed unless the relevant system provides that information.
+
+## 11. Important Rule
+
+The AI assistant must not invent refund information.
+
+If the database does not contain refund status information, the assistant should explain that it cannot confirm the refund status and should direct the customer to support for verification.
