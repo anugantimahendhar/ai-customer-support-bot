@@ -1,4 +1,5 @@
 import os
+import streamlit as st
 
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -17,14 +18,32 @@ load_dotenv()
 
 
 # =========================================================
-# 2. Create policy vector store
+# 2. Get Google API Key
+# =========================================================
+
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+
+# Streamlit Cloud
+if not GOOGLE_API_KEY:
+    GOOGLE_API_KEY = st.secrets.get("GOOGLE_API_KEY")
+
+# Check API key
+if not GOOGLE_API_KEY:
+    raise ValueError(
+        "GOOGLE_API_KEY is missing. "
+        "Add it to Streamlit Cloud Secrets."
+    )
+
+
+# =========================================================
+# 3. Create policy vector store
 # =========================================================
 
 vectorstore = create_vectorstore()
 
 
 # =========================================================
-# 3. Create policy retriever
+# 4. Create policy retriever
 # =========================================================
 
 policy_retriever = vectorstore.as_retriever(
@@ -33,7 +52,7 @@ policy_retriever = vectorstore.as_retriever(
 
 
 # =========================================================
-# 4. Convert retriever into a tool
+# 5. Convert retriever into a tool
 # =========================================================
 
 policy_search = create_retriever_tool(
@@ -48,18 +67,18 @@ policy_search = create_retriever_tool(
 
 
 # =========================================================
-# 5. Create Gemini model
+# 6. Create Gemini model
 # =========================================================
 
 llm = ChatGoogleGenerativeAI(
-    model="gemini- 3.5-flash",
-    google_api_key=os.getenv("GOOGLE_API_KEY"),
+    model="gemini-3.5-flash",
+    google_api_key=GOOGLE_API_KEY,
     temperature=0
 )
 
 
 # =========================================================
-# 6. Give Gemini access to both tools
+# 7. Give Gemini access to both tools
 # =========================================================
 
 tools = [
@@ -67,18 +86,16 @@ tools = [
     get_order_status
 ]
 
-
 tools_by_name = {
     tool.name: tool
     for tool in tools
 }
 
-
 llm_with_tools = llm.bind_tools(tools)
 
 
 # =========================================================
-# 7. AI Customer Support Agent
+# 8. AI Customer Support Agent
 # =========================================================
 
 def ask_agent(question):
@@ -112,16 +129,12 @@ Your responsibilities:
 
 6. Never say an order is cancelled unless the database confirms it.
 
-Conversation behavior:
-
-7. If the customer says:
-   "okay", "thanks", "thank you", or similar after receiving
-   an answer, ask:
+7. If the customer says "okay", "thanks", or "thank you",
+   ask:
    "Is there anything else you'd like to know about your order?"
 
-8. If the customer says:
-   "no", "no thanks", "that's all", "it's okay",
-   or similar, respond:
+8. If the customer says "no", "no thanks", "that's all",
+   "it's okay", or similar, respond:
    "Thank you for contacting customer support. Have a nice day!"
 
 9. Keep responses natural, short, and professional.
@@ -133,18 +146,16 @@ Conversation behavior:
         )
     ]
 
-
     # =====================================================
-    # 8. Allow multiple tool calls
+    # 9. Allow multiple tool calls
     # =====================================================
 
     for _ in range(5):
 
         response = llm_with_tools.invoke(messages)
 
-        # Add Gemini response to conversation
+        # Add Gemini response
         messages.append(response)
-
 
         # =================================================
         # No tool required
@@ -171,7 +182,6 @@ Conversation behavior:
         for tool_call in response.tool_calls:
 
             tool_name = tool_call["name"]
-
             tool_args = tool_call["args"]
 
             print(
@@ -192,10 +202,8 @@ Conversation behavior:
 
                 continue
 
-
             # Execute tool
             result = tool.invoke(tool_args)
-
 
             # Send result back to Gemini
             messages.append(
@@ -205,9 +213,5 @@ Conversation behavior:
                 )
             )
 
-
-    # =====================================================
-    # If agent cannot complete within 5 iterations
-    # =====================================================
 
     return "I could not complete the request."

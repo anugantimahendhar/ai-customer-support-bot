@@ -10,53 +10,38 @@ from langchain_chroma import Chroma
 
 
 # ==================================================
-# Load environment variables
+# 1. Load .env
 # ==================================================
 
 load_dotenv()
 
 
 # ==================================================
-# Get Google API Key
+# 2. Get Google API Key
 # ==================================================
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
-
-# If running on Streamlit Cloud,
-# get the key from Streamlit Secrets
+# If .env does not have the key,
+# get it from Streamlit Cloud Secrets
 if not GOOGLE_API_KEY:
-
-    try:
-        GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
-
-    except Exception:
-        GOOGLE_API_KEY = None
+    GOOGLE_API_KEY = st.secrets.get("GOOGLE_API_KEY")
 
 
-# ==================================================
-# Validate API Key
-# ==================================================
-
+# Check API key
 if not GOOGLE_API_KEY:
-
     raise ValueError(
-        "GOOGLE_API_KEY is missing. "
-        "Add it to your .env file locally "
-        "or Streamlit Cloud Secrets."
+        "GOOGLE_API_KEY is missing."
     )
 
 
 # ==================================================
-# Create Vector Store
+# 3. Create Vector Store
 # ==================================================
 
 def create_vectorstore():
 
-    # ----------------------------------------------
-    # Load policy documents
-    # ----------------------------------------------
-
+    # Load policy files
     loader = DirectoryLoader(
         "data/policies",
         glob="*.txt",
@@ -65,15 +50,10 @@ def create_vectorstore():
 
     documents = loader.load()
 
-    print(
-        f"Loaded {len(documents)} policy files."
-    )
+    print(f"Loaded {len(documents)} policy files.")
 
 
-    # ----------------------------------------------
-    # Split documents into chunks
-    # ----------------------------------------------
-
+    # Split documents
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=500,
         chunk_overlap=50
@@ -83,68 +63,47 @@ def create_vectorstore():
         documents
     )
 
-    print(
-        f"Created {len(chunks)} chunks."
-    )
+    print(f"Created {len(chunks)} chunks.")
 
 
-    # ----------------------------------------------
-    # Create embeddings
-    # ----------------------------------------------
-
+    # Create Gemini embeddings
     embeddings = GoogleGenerativeAIEmbeddings(
         model="models/gemini-embedding-001",
         google_api_key=GOOGLE_API_KEY
     )
 
 
-    # ----------------------------------------------
     # Create Chroma vector store
-    # ----------------------------------------------
-
     vectorstore = Chroma.from_documents(
         documents=chunks,
         embedding=embeddings,
         persist_directory="vectorstore"
     )
 
-    print(
-        "Vector store created successfully."
-    )
+    print("Vector store created successfully.")
 
     return vectorstore
 
 
 # ==================================================
-# Test locally
+# 4. Test locally
 # ==================================================
 
 if __name__ == "__main__":
 
     vectorstore = create_vectorstore()
 
-
-    # Create retriever
-
     retriever = vectorstore.as_retriever(
         search_kwargs={"k": 3}
     )
-
-
-    # Test retriever
 
     results = retriever.invoke(
         "How long do I have to return a product?"
     )
 
-
-    print(
-        "\nRelevant policy information:\n"
-    )
-
+    print("\nRelevant policy information:\n")
 
     for result in results:
 
         print(result.page_content)
-
         print("-" * 50)
